@@ -116,7 +116,7 @@ local function generate_header(config)
 
     if config.show_date then
       table.insert(header, os.date('%Y-%m-%d %H:%M:%S '))
-      -- table.insert(header, '')
+      table.insert(header, '')
     end
 
     api.nvim_buf_set_lines(config.bufnr, 0, -1, false, utils.center_align(header))
