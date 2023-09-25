@@ -36,6 +36,7 @@ local function default_options()
     theme = 'hyper',
     disable_move = false,
     shortcut_type = 'letter',
+    alphabetic_shortcuts = false,
     buffer_name = 'Dashboard',
     change_to_vcs_root = false,
     config = {
