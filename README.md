@@ -75,11 +75,7 @@ the `config` field is used for theme. general field
 ```lua
 config = {
   header -- type is table def
-  week_header = {
-    enable  --boolean use a week header
-    concat  --concat string after time string line
-    append  --table append after time string line
-  },
+  week_header -- boolean use a week header
   disable_move  -- boolean default is false disable move key
 }
 ```
@@ -158,9 +154,7 @@ example config of screenshot
   db.setup({
     theme = 'hyper',
     config = {
-      week_header = {
-       enable = true,
-      },
+      week_header = true,
       shortcut = {
         { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
         {

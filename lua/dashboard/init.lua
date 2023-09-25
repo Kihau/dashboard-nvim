@@ -40,12 +40,8 @@ local function default_options()
     buffer_name = 'Dashboard',
     change_to_vcs_root = false,
     config = {
-      week_header = {
-        enable = false,
-        concat = nil,
-        append = nil,
-      },
-      show_date = true,
+      week_header = false,
+      show_date = false,
     },
     hide = {
       statusline = true,

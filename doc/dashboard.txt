@@ -91,11 +91,8 @@ the `config` field is used for theme. general field
 >lua
     config = {
       header -- type is table def
-      week_header = {
-        enable  --boolean use a week header
-        concat  --concat string after time string line
-        append  --table append after time string line
-      },
+      week_header -- boolean use a week header
+      show_date -- boolean default is false, shows date under the header
       disable_move  -- boolean default is false disable move key
     }
 <
@@ -179,9 +176,7 @@ Hyper ~
       db.setup({
         theme = 'hyper',
         config = {
-          week_header = {
-           enable = true,
-          },
+          week_header = false,
           shortcut = {
             { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
             {

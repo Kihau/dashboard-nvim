@@ -89,18 +89,12 @@ local function default_header()
   }
 end
 
--- local function week_header(concat, append)
-local function week_header(concat, append)
+local function week_header()
   local week = week_ascii_text()
   local daysoftheweek =
     { 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' }
   local day = daysoftheweek[os.date('*t').wday]
   local tbl = week[day]
-  -- table.insert(tbl, os.date('%Y-%m-%d %H:%M:%S ') .. (concat or ''))
-  -- if append then
-  --   vim.list_extend(tbl, append)
-  -- end
-  -- table.insert(tbl, '')
   return tbl
 end
 
@@ -109,10 +103,7 @@ local function generate_header(config)
     vim.bo[config.bufnr].modifiable = true
   end
   if not config.command then
-    local header = config.week_header
-        and config.week_header.enable
-        and week_header(config.week_header.concat, config.week_header.append)
-      or (config.header or default_header())
+    local header = config.week_header and week_header() or (config.header or default_header())
 
     if config.show_date then
       table.insert(header, os.date('%Y-%m-%d %H:%M:%S '))
