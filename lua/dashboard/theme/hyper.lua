@@ -235,7 +235,7 @@ local function letter_hotkey(config)
   end
 
   for uppercase_key in pairs(unused_uppercase_keys) do
-    table.insert(unused_uppercase_keys, uppercase_key)
+    table.insert(unused_keys, uppercase_key)
   end
 
   local fallback_hotkey = 0
