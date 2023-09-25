@@ -218,7 +218,7 @@ local function letter_hotkey(config)
     end
   end
 
-  if not config.alphabetic_shortcuts then
+  if not config.alphabetic_hotkeys then
     shuffle_table(unused_keys)
   end
 
@@ -230,7 +230,7 @@ local function letter_hotkey(config)
     end
   end
 
-  if not config.alphabetic_shortcuts then
+  if not config.alphabetic_hotkeys then
     shuffle_table(unused_uppercase_keys)
   end
 
@@ -262,7 +262,7 @@ local function number_hotkey()
 end
 
 local function gen_hotkey(config)
-  if config.shortcut_type == 'number' then
+  if config.hotkey_type == 'number' then
     return number_hotkey()
   end
   return letter_hotkey(config)
