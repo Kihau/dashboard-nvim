@@ -224,7 +224,7 @@ local function letter_hotkey(config)
 
   local unused_uppercase_keys = {}
   -- A - Z
-  for key = 64, 90 do
+  for key = 65, 90 do
     if not vim.tbl_contains(list, key) then
       table.insert(unused_uppercase_keys, key)
     end
