@@ -45,6 +45,7 @@ local function default_options()
         concat = nil,
         append = nil,
       },
+      show_date = true,
     },
     hide = {
       statusline = true,

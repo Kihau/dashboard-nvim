@@ -89,17 +89,18 @@ local function default_header()
   }
 end
 
+-- local function week_header(concat, append)
 local function week_header(concat, append)
   local week = week_ascii_text()
   local daysoftheweek =
     { 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' }
   local day = daysoftheweek[os.date('*t').wday]
   local tbl = week[day]
-  table.insert(tbl, os.date('%Y-%m-%d %H:%M:%S ') .. (concat or ''))
-  if append then
-    vim.list_extend(tbl, append)
-  end
-  table.insert(tbl, '')
+  -- table.insert(tbl, os.date('%Y-%m-%d %H:%M:%S ') .. (concat or ''))
+  -- if append then
+  --   vim.list_extend(tbl, append)
+  -- end
+  -- table.insert(tbl, '')
   return tbl
 end
 
@@ -113,6 +114,11 @@ local function generate_header(config)
         and week_header(config.week_header.concat, config.week_header.append)
       or (config.header or default_header())
     api.nvim_buf_set_lines(config.bufnr, 0, -1, false, utils.center_align(header))
+
+    if config.show_date then
+      table.insert(header, os.date('%Y-%m-%d %H:%M:%S '))
+      table.insert(header, '')
+    end
 
     for i, _ in ipairs(header) do
       vim.api.nvim_buf_add_highlight(config.bufnr, 0, 'DashboardHeader', i - 1, 0, -1)

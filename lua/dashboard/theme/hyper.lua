@@ -234,8 +234,8 @@ local function letter_hotkey(config)
     shuffle_table(unused_uppercase_keys)
   end
 
-  for uppercase_key in pairs(unused_uppercase_keys) do
-    table.insert(unused_keys, uppercase_key)
+  for key in pairs(unused_uppercase_keys) do
+    table.insert(unused_keys, key)
   end
 
   local fallback_hotkey = 0
