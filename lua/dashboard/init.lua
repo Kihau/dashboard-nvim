@@ -36,10 +36,10 @@ local function default_options()
     theme = 'hyper',
     disable_move = false,
     hotkey_type = 'letter',
-    alphabetic_hotkeys = false,
     buffer_name = 'Dashboard',
     change_to_vcs_root = false,
     config = {
+      alphabetic_hotkeys = false,
       week_header = false,
       show_date = false,
     },
