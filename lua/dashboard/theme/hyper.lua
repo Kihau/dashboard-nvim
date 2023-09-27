@@ -207,43 +207,76 @@ local function letter_hotkey(config)
     end
   end
 
+  -- If excluded is a thing
+  local excluded = {}
+  for i = 1, #config.hotkeys.excluded do
+    local key = config.hotkeys.excluded:sub(i,i)
+    table.insert(excluded, key:byte())
+  end
+  -- config.hotkeys.excluded = excluded
+
+  -- If custom_order is a thing
+  local custom_order = {}
+  for i = 1, #config.hotkeys.custom_order do
+    local key = config.hotkeys.custom_order:sub(i,i)
+    table.insert(custom_order, key:byte())
+  end
+  -- config.hotkeys.custom_order = custom_order
+
   math.randomseed(os.time())
 
   -- Create key tables, fill them with unused characters and shuffle.
   local unused_keys = {}
+
   -- a - z
   for key = 97, 122 do
-    if not vim.tbl_contains(list, key) then
+    if not vim.tbl_contains(list, key)
+       and not vim.tbl_contains(excluded, key)
+       and not vim.tbl_contains(custom_order, key)
+    then
       table.insert(unused_keys, key)
     end
   end
 
-  if not config.alphabetic_hotkeys then
+  if not config.hotkeys.alphabetic  then
     shuffle_table(unused_keys)
   end
 
   local unused_uppercase_keys = {}
   -- A - Z
   for key = 65, 90 do
-    if not vim.tbl_contains(list, key) then
+    if not vim.tbl_contains(list, key)
+       and not vim.tbl_contains(excluded, key)
+       and not vim.tbl_contains(custom_order, key)
+    then
       table.insert(unused_uppercase_keys, key)
     end
   end
 
-  if not config.alphabetic_hotkeys then
+  if not config.hotkeys.alphabetic then
     shuffle_table(unused_uppercase_keys)
   end
 
+  local hotkeys = {}
+
+  for _, key in pairs(custom_order) do
+    table.insert(hotkeys, key)
+  end
+
+  for _, key in pairs(unused_keys) do
+    table.insert(hotkeys, key)
+  end
+
   for _, key in pairs(unused_uppercase_keys) do
-    table.insert(unused_keys, key)
+    table.insert(hotkeys, key)
   end
 
   local fallback_hotkey = 0
 
   return function()
-    if #unused_keys ~= 0 then
+    if #hotkeys ~= 0 then
       -- Pop an unused key to use it as a hotkey.
-      local key = table.remove(unused_keys, 1)
+      local key = table.remove(hotkeys, 1)
       return string.char(key)
     else
       -- All keys are already used. Fallback to the number generation.
@@ -262,7 +295,7 @@ local function number_hotkey()
 end
 
 local function gen_hotkey(config)
-  if config.hotkey_type == 'number' then
+  if config.hotkeys.type == 'number' then
     return number_hotkey()
   end
   return letter_hotkey(config)

@@ -35,11 +35,15 @@ local function default_options()
   return {
     theme = 'hyper',
     disable_move = false,
-    hotkey_type = 'letter',
+    hotkeys = {
+      type = 'letter',
+      alphabetic = false,
+      custom_order = {},
+      excluded = {},
+    },
     buffer_name = 'Dashboard',
     change_to_vcs_root = false,
     config = {
-      alphabetic_hotkeys = false,
       week_header = false,
       show_date = false,
     },
@@ -199,7 +203,7 @@ function db:load_theme(opts)
     bufnr = self.bufnr,
     winid = self.winid,
     confirm_key = opts.confirm_key or nil,
-    hotkey_type = opts.hotkey_type,
+    hotkeys = opts.hotkeys,
     change_to_vcs_root = opts.change_to_vcs_root,
   })
 
